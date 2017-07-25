@@ -5,18 +5,19 @@ import Loader from './loader';
 import '../App.css';
 
 class FordPass extends Component {
-  constructor(props) {
-    super(props);
+  renderContent() {
+    if(this.props.app.content == null)
+      return <Loader />
+    else
+      return <p>{JSON.stringify(this.props.app.content)}</p>
   }
-
   render() {
     return (
       <div className="app-body">
         <Helmet>
           <title>FordPass Copy</title>
         </Helmet>
-        <p className="u-centered">FordPass.</p>
-        { this.props.content == null ? <Loader /> : '' }
+        {this.renderContent()}
       </div>
     );
   }

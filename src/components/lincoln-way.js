@@ -5,18 +5,21 @@ import Loader from './loader';
 import '../App.css';
 
 class LincolnWay extends Component {
-  constructor(props) {
-    super(props);
+  renderContent() {
+    if(this.props.app.content == null)
+      return <Loader />
+    else
+      return <p>{JSON.stringify(this.props.app.content)}</p>
   }
-
   render() {
+    console.log(this.props);
     return (
       <div className="app-body">
         <Helmet>
           <title>Lincoln Way Copy</title>
         </Helmet>
         <p className="u-centered">Lincoln Way.</p>
-        { this.props.content == null ? <Loader /> : '' }
+        {this.renderContent()}
       </div>
     );
   }
