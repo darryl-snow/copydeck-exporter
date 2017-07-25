@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import Header from './components/header';
-import Main from './components/main';
-import './App.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { ConnectedRouter } from 'connected-react-router'
+import routes from './routes'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        <Header />
-        <Main />
-      </div>
-    );
-  }
+const App = ({ history }) => {
+  return (
+    <ConnectedRouter history={history}>
+      { routes }
+    </ConnectedRouter>
+  )
 }
 
-export default App;
+App.propTypes = {
+  history: PropTypes.object,
+}
+
+export default App

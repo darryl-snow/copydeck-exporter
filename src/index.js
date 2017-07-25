@@ -1,13 +1,30 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { applyMiddleware, compose, createStore } from 'redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, connectRouter } from 'connected-react-router'
+import { Provider } from 'react-redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import rootReducer from './reducers'
 
-render(
-  <Router>
-    <App />
-  </Router>,
- document.getElementById('root')
+const history = createBrowserHistory();
+
+const store = createStore(
+  connectRouter(history)(rootReducer),
+  compose(
+    applyMiddleware(
+      routerMiddleware(history)
+    )
+  )
 );
-registerServiceWorker();
+
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App history={history} />
+    </Provider>,
+    document.getElementById('root')
+  );
+}
+
+render()
