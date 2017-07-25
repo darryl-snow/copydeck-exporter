@@ -1,4 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware, connectRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
@@ -13,6 +14,7 @@ const store = createStore(
   connectRouter(history)(rootReducer),
   compose(
     applyMiddleware(
+      thunkMiddleware,
       routerMiddleware(history)
     )
   )

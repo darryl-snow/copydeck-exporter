@@ -1,7 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ConnectedRouter } from 'connected-react-router'
-import routes from './routes'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ConnectedRouter } from 'connected-react-router';
+import routes from './routes';
+
+// import { getCards } from './utils/trello';
+// getCards("lincolnway");
 
 const App = ({ history }) => {
   return (
@@ -15,4 +18,4 @@ App.propTypes = {
   history: PropTypes.object,
 }
 
-export default App
+export default App;

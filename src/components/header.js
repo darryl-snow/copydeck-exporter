@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from './button';
-import { appSwitch } from '../actions';
+import { appSwitch, getContent } from '../actions';
 import '../App.css';
 
 class Header extends Component {
@@ -10,10 +10,14 @@ class Header extends Component {
 
     this.switchApp = this.switchApp.bind(this);
 
+    if(props.pathname !== "/")
+      this.switchApp(props.pathname.substring(1));
+
   }
 
   switchApp(app) {
     this.props.appSwitch(app);
+    this.props.getContent(app);
   }
 
   render() {
@@ -32,7 +36,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  appSwitch: (app) => dispatch(appSwitch(app))
+  appSwitch: (app) => dispatch(appSwitch(app)),
+  getContent: (app) => dispatch(getContent(app))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
