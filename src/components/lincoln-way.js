@@ -10,14 +10,13 @@ class LincolnWay extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="app-body">
         <Helmet>
           <title>Lincoln Way Copy</title>
         </Helmet>
         <p className="u-centered">Lincoln Way.</p>
-        { this.props.content === null ? <Loader /> : '' }
+        { this.props.content == null ? <Loader /> : '' }
       </div>
     );
   }

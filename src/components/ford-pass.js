@@ -16,7 +16,7 @@ class FordPass extends Component {
           <title>FordPass Copy</title>
         </Helmet>
         <p className="u-centered">FordPass.</p>
-        { this.props.content === null ? <Loader /> : '' }
+        { this.props.content == null ? <Loader /> : '' }
       </div>
     );
   }
