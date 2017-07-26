@@ -18,6 +18,61 @@ function getList(app) {
   }
 }
 
+function parseCards(cards) {
+  var arr = [];
+  let row = {};
+  let content = {};
+  for(let i = 0; i < cards.length; i++) {
+    row = {};
+    content = {};
+    row.name = cards[i].name;
+    row.trello = cards[i].shortUrl;
+    row.labels = parseLabels(cards[i].labels);
+    content = parseContent(cards[i].desc);
+    row.strings = {
+      EN: content.EN,
+      CN: content.CN
+    }
+    row.pivotaltracker = content.tracker;
+    row.height = Math.max(content.EN.length, content.CN.length);
+    arr.push(row);
+  }
+  return arr;
+}
+
+function parseLabels(labels) {
+  let arr = [];
+  for (let i = 0; i < labels.length; i++) {
+    if(labels[i].name !== "FordPass" && labels[i].name !== "Lincoln Way" && labels[i].name !== "fp" && labels[i].name !== "lw") {
+      arr.push(labels[i].name);
+    }
+  }
+  return arr;
+}
+
+function parseContent(desc) {
+  let strings = desc.split(/\n/g);
+  let EN = [];
+  let CN = [];
+  let tracker = [];
+
+  for(let i = 0; i < strings.length; i++) {
+    if(strings[i].trim().indexOf("EN:") !== -1)
+      EN.push(strings[i].trim().substr(3).trim());
+    if(strings[i].trim().indexOf("CN:") !== -1)
+      CN.push(strings[i].trim().substr(3).trim());
+    if(strings[i].trim().indexOf("https://") === 0)
+      tracker.push(strings[i].trim().substr(8).trim());
+  }
+
+  return {
+    EN: EN,
+    CN: CN,
+    tracker: tracker
+  }
+
+}
+
 export const appSwitch = (name) => ({
   type: APP_SWITCH,
   name: name
@@ -28,11 +83,11 @@ export const getContent = (name) => {
   const list = getList(name);
 
   return (dispatch) => {
-    trello.get(`/1/lists/${list}/cards?fields=name,desc,shortUrl`, (err, data) => {
+    trello.get(`/1/lists/${list}/cards?fields=name,desc,shortUrl,labels`, (err, data) => {
       if (err) throw err;
       dispatch({
         type: GET_CONTENT,
-        content: data,
+        content: parseCards(data),
         name: name
       });
     });

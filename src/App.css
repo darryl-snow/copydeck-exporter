@@ -13,6 +13,28 @@ body {
   text-align: center;
 }
 
+.u-block {
+  display: block;
+}
+
+.u-margin-top-bottom {
+  margin: 1em 0;
+}
+
+.o-link,
+.o-link:visited {
+  color: var(--ford-color);
+  text-decoration: none;
+  transition: 0.2s all ease-in-out;
+}
+
+.o-link:active,
+.o-link:focus,
+.o-link:hover {
+  color: var(--lincoln-color);
+  text-decoration: none;
+}
+
 .app-header {
   background-color: #E9E9E9;
   padding: 2em;
@@ -107,5 +129,63 @@ body {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+.table {
+  width: 90%;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  background-color: transparent;
+}
+th,
+td {
+  padding: 0.5em;
+  vertical-align: top;
+  border-top: 1px solid #e9ecef;
+}
+
+thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #e9ecef;
+  color: #495057;
+  background-color: #e9ecef;
+}
+tbody + tbody {
+  border-top: 2px solid #e9ecef;
+}
+.table-bordered {
+  border: 1px solid #e9ecef;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #e9ecef;
+}
+
+.table-bordered thead th,
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.table-striped tbody:nth-of-type(odd) {
+  background-color: rgba(#000,.05);
+}
+
+.table-hover tbody tr:hover{
+  background-color: rgba(#000,.075);
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive.table-bordered {
+    border: 0;
   }
 }
