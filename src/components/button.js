@@ -10,7 +10,7 @@ class Button extends Component {
 
   render() {
     return (
-        <Link to={"/" + this.props.app} className={this.props.selected ? "button button--selected button--large button--" + this.props.app : "button button--large button--" + this.props.app} onClick={this.handleClick}></Link>
+        <Link to={process.env.PUBLIC_URL + "/" + this.props.app} className={this.props.selected ? "button button--selected button--large button--" + this.props.app : "button button--large button--" + this.props.app} onClick={this.handleClick}></Link>
     );
   }
 }
