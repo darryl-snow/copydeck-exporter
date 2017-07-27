@@ -5,7 +5,8 @@ import {
 
 const INITIAL_STATE = {
   name: '',
-  content: null
+  content: null,
+  csv: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,12 +14,14 @@ export default (state = INITIAL_STATE, action) => {
     case APP_SWITCH:
       return Object.assign({}, state, {
         name: action.name,
-        content: null
+        content: null,
+        csv: null
       });
     case GET_CONTENT:
       return Object.assign({}, state, {
         content: action.content,
-        name: action.name
+        name: action.name,
+        csv: action.csv
       });
     default:
       return state;

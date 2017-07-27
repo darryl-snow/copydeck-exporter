@@ -9,9 +9,9 @@ const routes = (
   <div>
     <Header />
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path='/fordpass' component={FordPass} />
-      <Route path='/lincolnway' component={LincolnWay} />
+      <Route exact path={process.env.PUBLIC_URL + '/'} component={Home} />
+      <Route path={process.env.PUBLIC_URL + '/fordpass'} component={FordPass} />
+      <Route path={process.env.PUBLIC_URL + '/lincolnway'} component={LincolnWay} />
       <Route component={Home} />
     </Switch>
   </div>

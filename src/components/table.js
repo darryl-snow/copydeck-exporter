@@ -12,7 +12,7 @@ class LincolnWay extends Component {
           <td rowSpan={card.height}>
             {card.labels.map(function(label, i){
               return (
-                <span className="o-label">{label}</span>
+                <span className="o-label" key={card.id + "-label-" + i}>{label}</span>
               );
             })}
           </td>
@@ -24,9 +24,13 @@ class LincolnWay extends Component {
             </a>
           </td>
           <td rowSpan={card.height}>
-            <a className="u-block o-link u-centered" href={card.tracker} title="Go to the Tracker story">
-              <ExternalLinkIcon />
-            </a>
+            {card.pivotaltracker.map(function(url, i){
+              return (
+                <a className="u-block o-link u-centered" href={url} key={card.id + "-tracker-" + i} title="Go to the Tracker story">
+                  <ExternalLinkIcon />
+                </a>
+              );
+            })}
           </td>
         </tr>
       );

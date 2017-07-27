@@ -13,12 +13,17 @@ class FordPass extends Component {
       return <Table cards={this.props.app.content} />
   }
   render() {
+    console.log(this.props.app.csv);
     return (
       <div className="app-body">
         <Helmet>
           <title>FordPass Copy</title>
         </Helmet>
-        <a className="u-centered u-block u-margin-top-bottom o-link" href="https://trello.com/b/Ug0AG4J5/translations-fordpass-lincoln-way" title="Go to the FordPass & Lincoln Way Translations Trello Board">Trello Board</a>
+        <div className="u-centered u-margin-top-bottom">
+          <a className="o-link" href="https://trello.com/b/Ug0AG4J5/translations-fordpass-lincoln-way" title="Go to the FordPass & Lincoln Way Translations Trello Board">Trello Board</a>
+          <span className="o-separator"></span>
+          <a className="o-link" download="fordpass-copydeck.csv" href={this.props.app.csv} title="Download a CSV Export">CSV Export</a>
+        </div>
         {this.renderContent()}
       </div>
     );

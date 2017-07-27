@@ -21,20 +21,29 @@ body {
   margin: 1em 0;
 }
 
-.o-link,
-.o-link:visited {
+.o-link[href],
+.o-link[href]:visited {
   color: var(--ford-color);
   opacity: 0.8;
   text-decoration: none;
   transition: 0.2s all ease-in-out;
 }
 
-.o-link:active,
-.o-link:focus,
-.o-link:hover {
+.o-link[href]:active,
+.o-link[href]:focus,
+.o-link[href]:hover {
   color: var(--lincoln-color);
   opacity: 1;
   text-decoration: none;
+}
+
+.o-separator {
+  display: inline-block;
+  margin: 0 1em;
+  height: 1em;
+  background: #ddd;
+  width: 1px;
+  vertical-align: text-top;
 }
 
 .o-icon {

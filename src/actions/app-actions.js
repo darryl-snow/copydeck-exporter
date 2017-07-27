@@ -3,9 +3,48 @@ import {
   GET_CONTENT
 } from './types';
 
-const Trello = require("node-trello");
+var json2csv = require('json2csv');
 
+const Trello = require("node-trello");
 const trello = new Trello("5e2338229bbfde5aa814186f5fcb4551", "2e13495ac57cea7cffaa989ba654045ea58c46d953a5a91afc5353cd7c91beba");
+
+const fields = [
+  "Name",
+  "Labels",
+  "EN",
+  "CN",
+  "Trello",
+  "Tracker"
+];
+
+function parseCSV(cards) {
+  let arr = [];
+  let content = {};
+  let height = 0;
+  for(let i = 0; i < cards.length; i++) {
+    content = parseContent(cards[i].desc);
+    height = Math.max(content.EN.length, content.CN.length);
+    arr.push({
+      Name: cards[i].name,
+      Labels: parseLabels(cards[i].labels).join(),
+      EN: content.EN[0],
+      CN: content.CN[0],
+      Trello: cards[i].shortUrl,
+      Tracker: content.tracker.join()
+    });
+    for(let i = 1; i < height; i++) {
+      arr.push({
+        Name: "",
+        Labels: "",
+        EN: content.EN[i],
+        CN: content.CN[i],
+        Trello: "",
+        Tracker: ""
+      })
+    }
+  }
+  return arr;
+}
 
 function getList(app) {
   switch(app) {
@@ -19,7 +58,7 @@ function getList(app) {
 }
 
 function parseCards(cards) {
-  var arr = [];
+  let arr = [];
   let row = {};
   let content = {};
   for(let i = 0; i < cards.length; i++) {
@@ -63,7 +102,7 @@ function parseContent(desc) {
     if(strings[i].trim().indexOf("CN:") !== -1)
       CN.push(strings[i].trim().substr(3).trim());
     if(strings[i].trim().indexOf("https://") === 0)
-      tracker.push(strings[i].trim().substr(8).trim());
+      tracker.push(strings[i].trim().trim());
   }
 
   return {
@@ -89,6 +128,7 @@ export const getContent = (name) => {
       dispatch({
         type: GET_CONTENT,
         content: parseCards(data),
+        csv: encodeURI("data:text/csv;charset=utf-8," + json2csv({data: parseCSV(data), fields: fields })),
         name: name
       });
     });
