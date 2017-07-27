@@ -24,6 +24,7 @@ body {
 .o-link,
 .o-link:visited {
   color: var(--ford-color);
+  opacity: 0.8;
   text-decoration: none;
   transition: 0.2s all ease-in-out;
 }
@@ -32,7 +33,29 @@ body {
 .o-link:focus,
 .o-link:hover {
   color: var(--lincoln-color);
+  opacity: 1;
   text-decoration: none;
+}
+
+.o-icon {
+  height: 3em;
+}
+
+.o-link .o-icon {
+  fill: #ddd;
+}
+
+.o-link[href] .o-icon {
+  fill: var(--ford-color);
+}
+
+.o-label {
+  background: #e9e9e9;
+  border: 2px solid #bbb;
+  border-radius: 3px;
+  padding: 3px 6px;
+  margin: 3px;
+  display: inline-block;
 }
 
 .app-header {
@@ -138,6 +161,7 @@ body {
   margin: 0 auto;
   margin-bottom: 1em;
   background-color: transparent;
+  border-collapse: collapse;
 }
 th,
 td {
@@ -147,7 +171,7 @@ td {
 }
 
 thead th {
-  vertical-align: bottom;
+  vertical-align: middle;
   border-bottom: 2px solid #e9ecef;
   color: #495057;
   background-color: #e9ecef;

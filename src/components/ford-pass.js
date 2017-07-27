@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Loader from './loader';
+import Table from './table';
 import '../App.css';
 
 class FordPass extends Component {
@@ -9,7 +10,7 @@ class FordPass extends Component {
     if(this.props.app.content == null)
       return <Loader />
     else
-      return <p>{JSON.stringify(this.props.app.content)}</p>
+      return <Table cards={this.props.app.content} />
   }
   render() {
     return (

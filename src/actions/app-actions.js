@@ -25,6 +25,7 @@ function parseCards(cards) {
   for(let i = 0; i < cards.length; i++) {
     row = {};
     content = {};
+    row.id = cards[i].id;
     row.name = cards[i].name;
     row.trello = cards[i].shortUrl;
     row.labels = parseLabels(cards[i].labels);
